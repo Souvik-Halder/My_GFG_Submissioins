@@ -27,7 +27,7 @@ class Solution
           curr.next=nxt.next;
           nxt.next=prev.next;
           prev.next=nxt;
-          nxt=nxt.next;
+          nxt=curr.next;
           
       }
       return dummyNode.next;
