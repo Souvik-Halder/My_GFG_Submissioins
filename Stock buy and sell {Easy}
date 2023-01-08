@@ -1,0 +1,78 @@
+//User function Template for Java
+
+class Solution{
+    //Function to find the days of buying and selling stock for max profit.
+    ArrayList<ArrayList<Integer> > stockBuySell(int A[], int n) {
+           int i=0;
+
+        ArrayList<ArrayList<Integer>> arr = new ArrayList<ArrayList<Integer>>(); 
+
+        int low=0,high=0,lowIndex=0,highIndex=0;
+
+        // Initializing low,high values to first day stock value
+
+        if(n>=1){
+
+            low=A[0];
+
+            high=A[0];
+
+        }
+
+        
+
+        for(i=0;i<n-1;i++){
+
+            if(high<A[i+1]){
+
+
+                highIndex=i+1;
+
+                // this is the condition when last value of array is a sell option day
+
+                if(i==n-2){
+
+                    ArrayList<Integer> ar = new ArrayList<Integer>();
+
+                    ar.add(lowIndex);
+
+                    ar.add(highIndex);
+
+                    arr.add(ar);
+
+                }
+
+            }
+
+            else{
+
+
+
+                // condition "lowIndex<highIndex" is checked because to remove zero profit sales
+
+                if(lowIndex<highIndex){
+
+                    ArrayList<Integer> ar = new ArrayList<Integer>();
+
+                    ar.add(lowIndex);
+
+                    ar.add(highIndex);
+
+                    arr.add(ar);
+
+                }
+
+                lowIndex=i+1;
+
+                
+
+            }
+            high=A[i+1];
+
+        }
+
+        return arr;
+
+        
+    }
+}
