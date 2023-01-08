@@ -1,0 +1,60 @@
+class Solution
+{
+    // arr[]: Input Array
+    // N : Size of the Array arr[]
+    //Function to count inversions in the array.
+    public static long merge(long[] arr,int l,int m,int h){
+        long inv=0;
+        long []left=new long[m-l+1];
+        long []right=new long[h-m];
+        for(int i =0;i<left.length;i++){
+            left[i] = arr[l+i];
+        }
+        for(int i=0;i<right.length;i++){
+            right[i]=arr[m+1+i];
+            
+        }
+        int i=0,j=0,k=l;
+        while(i<left.length && j<right.length){
+            if(left[i]<=right[j]){
+                arr[k++]=left[i++];
+            }
+            else{
+                arr[k++]=right[j++];
+                //here left[i]>right[i] is the case of inversion
+                //so here we are going to increase this by left.length-i;
+                //which means mid-i;
+                inv+=left.length-i;
+                //here this is is the case where the left.length just give the position of the 
+                //mid element and by using left.length-i you get the exact number by which you can just increase the inversion counter
+                //
+            }
+        }
+        //let's copy the rest part
+        while(i<left.length){
+            arr[k++]=left[i++];
+        }
+        while(j<right.length){
+            arr[k++]=right[j++];
+        }
+        return inv;
+        
+    }
+    public static long mergeSort(long[]arr,int low,int high){
+        long inv=0;
+        if(low<high){
+            int mid=(low+high)/2;
+            inv+=mergeSort(arr,low,mid);
+            inv+=mergeSort(arr,mid+1,high);
+            inv+=merge(arr,low,mid,high);
+        }
+        return inv;
+        
+    }
+    static long inversionCount(long arr[], long N)
+    {
+        int low=0;
+        int high=(int)(N-1);
+       return mergeSort(arr,low,high);
+    }
+}
