@@ -1,0 +1,51 @@
+class Solution
+{
+    static boolean matches(char top,char ch){
+        if(top=='(' && ch==')'){
+            return true;
+        }
+        else if(top=='{' && ch=='}'){
+            return true;
+        }
+        else if(top=='[' && ch==']'){
+            return true;
+        }
+        return false;
+    }
+    //Function to check if brackets are balanced or not.
+    static boolean ispar(String x)
+    {
+        Stack<Character> stack= new Stack<>();
+        
+        // if opening bracket push this on the stack
+        //i  closing bracket then pop the matching opening bracket from the stack
+        for(int i=0;i<x.length();i++){
+            char ch=x.charAt(i);
+            
+            if(ch=='{'||ch=='('||ch=='['){
+                stack.push(ch);
+            }
+            else{
+                if(!stack.isEmpty()){
+                    char top=stack.peek();//the way to find the top of the stack
+                    if(matches(top,ch)){
+                        stack.pop();//to pop the bracket from stack if matches
+                    }
+                    else{
+                        return false;
+                    }
+                }
+                else{
+                    return false;
+                }
+            }
+            
+        }
+        if(stack.isEmpty()){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+}
