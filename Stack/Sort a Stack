@@ -1,0 +1,34 @@
+/*Complete the function below*/
+class GfG{
+    static Stack<Integer>  insert_correct_position(int x,Stack<Integer> s){
+        if(s.size()==0 || s.peek()<x){
+            s.push(x);
+        }
+        else{
+            int a=s.peek();
+            s.pop();
+         Stack<Integer> stack= insert_correct_position(x,s);
+            s.push(a);
+             return stack;
+        }
+       return s;
+    }
+    static Stack<Integer> reverse(Stack<Integer> s){
+        if(s.size()>0){
+            int x=s.peek();//Stack Frame to store the data of stack
+            s.pop();
+            reverse(s);
+           Stack<Integer> stack= insert_correct_position(x,s);
+             return stack;
+        }
+        return s;
+    }
+       
+	public Stack<Integer> sort(Stack<Integer> s)
+	{
+	   Stack<Integer> stack= reverse(s);
+	   return stack;
+	    
+	   
+	}
+}
