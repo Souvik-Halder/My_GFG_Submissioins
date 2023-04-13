@@ -1,0 +1,32 @@
+class Solution {
+    static int findMaxLen(String S) {
+     Stack<Integer> st=new Stack<>();
+     for(int i=0;i<S.length();i++){
+         if(S.charAt(i)=='('){
+             st.push(i);
+         }
+         //The below condition is for the when the closing parenthesis ) arrived in the string
+         else{
+             if(!st.empty()&& S.charAt(st.peek())=='('){
+                 st.pop();
+             }
+             else{
+                 st.push(i);
+             }
+         }
+     }
+        int max=0;
+        int end=S.length();
+        //The last condition if the stack is not empty
+        while(!st.empty()){
+            //First pop the element and store it in a variable
+            //Then find the max element and find maximum element among max and (end-ele-1) 
+        //Then make the end element as we pop the element from the stack
+    int ele=st.pop();
+    max=Math.max(max,end-ele-1);
+    end=ele;
+        }
+        return Math.max(end,max);
+        
+    }
+};
