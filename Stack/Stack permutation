@@ -1,0 +1,27 @@
+
+class Solution {
+    public static int isStackPermutation(int n, int[] ip, int[] op) {
+      Stack<Integer> s=new Stack<>();
+      int j=0;
+      for(int i=0;i<n;i++){
+          s.push(ip[i]);//pushing the element of input array into the stack
+          while(s.size()>0 && s.peek()==op[j]){
+              s.pop();
+              j++;
+              //if the stack size is not empty and the top of the stack matches to the output array then pop the element otherwise increase the i pointer here
+              // due to the for loop if the condition does not match then automatically the i pointer will increase
+              
+          }
+          
+          
+          
+      }
+      //when the i th pointer loop is over that means that the i pointer reaches to the end of the input  array
+      //now we need to check the condition
+      if(j==n && s.size()==0)
+      return 1;
+      else return 0;
+        
+    }
+}
+            
