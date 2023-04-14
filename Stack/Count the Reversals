@@ -1,0 +1,37 @@
+class Sol
+{
+    int countRev (String s)
+    {
+        if(s.length()%2!=0){
+            return -1;
+        }
+        else{
+            Stack<Character> st=new Stack<>();
+            int c=0;//counter for close braces
+            int c2=0;//counter for opening braces
+            for(int i=0;i<s.length();i++){
+                char ch=s.charAt(i);
+                if(ch=='{'){
+                    st.push(ch);
+                    c2++;
+                }
+                else if(ch=='}' && !st.empty() && st.peek()=='{'){
+                    st.pop();
+                    c2--;
+                }
+                else{
+                    c++;
+                }
+                
+              
+               
+            }
+            if(c%2!=0) c=(c/2)+1;
+                else c=c/2;
+                if(c2%2!=0) c2=(c2/2)+1;
+                else c2=c2/2;
+            
+             return c2+c;
+        }
+    }
+}
