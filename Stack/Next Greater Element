@@ -1,0 +1,33 @@
+class Solution
+{
+    //Function to find the next greater element for each element of the array.
+    public static long[] nextLargerElement(long[] arr, int n)
+    { 
+        Stack<Long> stk=new Stack<>();
+          long p=arr[arr.length-1];
+          arr[arr.length-1]=-1;
+          stk.push(p);
+        // Your code here
+        for(int i=arr.length-2;i>=0;i--){
+                p=arr[i];
+            if(arr[i]<stk.peek()){
+                arr[i]=stk.peek();
+                stk.push(p);
+            }else{
+                while(arr[i]>=stk.peek()){
+                    stk.pop();
+                    if(stk.isEmpty()){
+                        
+                          arr[i]=-1;
+                          stk.push(p);
+                    }
+                } 
+                if(arr[i]!=-1 && arr[i]<stk.peek()){
+                    arr[i]=stk.peek();
+                    stk.push(p);
+                }
+            }
+        }
+        return arr;
+    } 
+}
