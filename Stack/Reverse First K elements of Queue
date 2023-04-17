@@ -1,0 +1,31 @@
+//Same Logic this code I have submitted in C++ because in java I am unable to access the methods
+//of the Queue for Insertion and Deletion written in the programme So i have submitted the 
+//C++ Logic
+// Function to reverse first k elements of a queue.
+queue<int> modifyQueue(queue<int> q, int k) {
+    stack<int> st;
+    int rem = q.size() - k;
+    //pushing the elements of the  queue to the stack upto k
+    while(!q.empty() && k--)
+    {
+        st.push(q.front());
+        q.pop();
+    }
+    //pushing back the elements from stack to queue upto when the stack is not empty
+    while(!st.empty())
+    {
+        q.push(st.top());
+        st.pop();
+    }
+    //For the size()-k element to push in the back of the queue
+    //As if the size of the queue is 5 and the k is 3 and the element of the queue is 12345
+    //Then if we don't write the below code the result will be 45321 
+    //so the 4 and 5 should be present in last so we pop and push them to the end as this is a queue there are two different ends for the pop and push element
+    //so 4 and 5 goes to the last end;
+    while(!q.empty() && rem--)
+    {
+        q.push(q.front());
+        q.pop();
+    }
+    return q;
+}
