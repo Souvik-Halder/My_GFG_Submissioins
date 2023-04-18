@@ -1,33 +1,24 @@
-class Solution
-{
-    //Function to find the next greater element for each element of the array.
-    public static long[] nextLargerElement(long[] arr, int n)
-    { 
-        Stack<Long> stk=new Stack<>();
-          long p=arr[arr.length-1];
-          arr[arr.length-1]=-1;
-          stk.push(p);
-        // Your code here
-        for(int i=arr.length-2;i>=0;i--){
-                p=arr[i];
-            if(arr[i]<stk.peek()){
-                arr[i]=stk.peek();
-                stk.push(p);
-            }else{
-                while(arr[i]>=stk.peek()){
-                    stk.pop();
-                    if(stk.isEmpty()){
-                        
-                          arr[i]=-1;
-                          stk.push(p);
-                    }
-                } 
-                if(arr[i]!=-1 && arr[i]<stk.peek()){
-                    arr[i]=stk.peek();
-                    stk.push(p);
-                }
-            }
-        }
-        return arr;
+//Here the logic is take any element in stack if there are any greater than that element
+//present in the stack then assign it to the taken variable and if not present then
+//push the element upto the stack is empty
+//If the stack is empty then make it's nextGreater Element to -1
+//and the last push the taken element to the stack
+class Solution{
+    public static long[] nextLargerElement(long[] arr, int n) { 
+      Stack<Integer> st=new Stack<>();
+      long[] nextGr=new long[n];
+      for(int i=n-1;i>=0;i--){
+          while(!st.isEmpty() && arr[st.peek()]<=arr[i]){
+              st.pop();
+          }
+          if(st.isEmpty()){//here we are traverisng from last to the first so here we need to make last element
+              nextGr[i]=-1;
+          }
+          else if(arr[st.peek()]>arr[i]){
+              nextGr[i]=arr[st.peek()];
+          }
+          st.push(i);
+      }
+      return nextGr;
     } 
 }
