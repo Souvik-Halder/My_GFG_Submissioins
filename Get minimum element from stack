@@ -1,0 +1,40 @@
+class GfG
+{
+    int minEle;
+    Stack<Integer> s=new Stack<>();
+    Stack<Integer> mins=new Stack<>();
+    
+    /*returns min element from stack*/
+int getMin()
+   {
+         if(mins.isEmpty()){
+        return -1;
+    }
+    return mins.peek();
+       }
+  
+    
+    /*returns poped element from stack*/
+    int pop()
+    {
+       if(s.isEmpty()){
+        return -1;
+    }
+    int ans = s.peek();
+        s.pop();
+        if(ans == mins.peek()){
+           mins.pop();
+        }
+         return ans ;
+    
+    }
+
+    /*push element x into the stack*/
+    void push(int x)
+    {
+	       s.push(x);
+    if(mins.size() == 0 || x <= mins.peek()){
+        mins.push(x);
+    }
+    }
+    }
