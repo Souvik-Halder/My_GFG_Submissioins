@@ -1,0 +1,28 @@
+
+class Solution{
+	Node nextRight(Node root, int key)
+    {
+	    Queue<Node> q=new LinkedList<>();
+	    q.add(root);
+	    boolean found=false;
+	    while(q.size()>0){
+	        //Traversing the each node the tree as we first add the root node to the tree
+	        //Now enter the nodes untill the queue is empty
+	        int sz=q.size();
+	        while(sz-->0){
+	            Node node =q.remove();
+	            if(found) return node;//if the found is true and the loop enters for the second iteration that means the right node is present 
+	            //for the key at the same level so return that node after removing from the queue
+	            if(node.data==key)found=true;//if the node found then make the found true
+	            if(node.left!=null)q.add(node.left);//if there is the left node present then add it to the queue
+	            if(node.right!=null)q.add(node.right);//if there is the right node present then add it to the queue
+	         
+	            
+	        }
+	        //If node is not found in the same level where the key is present then simply
+	        //we need to return the -1
+	        if(found)return new Node(-1);
+	    }
+	    return null;
+    }
+}
