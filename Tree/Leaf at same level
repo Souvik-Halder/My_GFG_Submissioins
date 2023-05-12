@@ -1,0 +1,31 @@
+class Solution
+{
+    int maxLevel = -1;
+    boolean ans = true;
+    
+    boolean check(Node root)
+    {
+        solve(root, 0);
+        return ans;
+    }
+    
+    void solve(Node root, int level){
+        // To save further iteration when ans is flaged false
+        if(root == null || !ans) return;
+        
+        // Check if the current node is leaf node or not
+        if(root.left == null && root.right == null){
+            
+            // if leaf is it the first time when reaching a leaf node the store that level
+            if(maxLevel == -1) maxLevel = level;
+            
+            // check if the leaf node is not equal to the maxLevel 
+            else if(maxLevel != level) ans = false;
+        }
+        
+        
+        solve(root.left, level +1);
+        solve(root.right, level +1);
+        
+    }
+}
