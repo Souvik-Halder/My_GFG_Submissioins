@@ -1,0 +1,30 @@
+class Solution
+{
+    //Function to return a list containing the bottom view of the given tree.
+    public ArrayList <Integer> bottomView(Node root)
+    {
+        ArrayList<Integer> ans=new ArrayList<>();
+        Map<Integer,Integer> map=new TreeMap<>();
+        root.hd=0;//This hd variable is for line
+        Queue<Node> q=new LinkedList<Node>();
+        q.add(root);//At first add the root to the queue
+        while(!q.isEmpty()){
+            Node temp=q.remove();
+            int hd=temp.hd;//taking the vertical line line from the node
+            map.put(hd,temp.data);//putting the line->node to the map
+            if(temp.left!=null){
+                temp.left.hd=hd-1;//as per the algorithm if left node is present then add the left node to the queue and make it's line to hd-1
+                q.add(temp.left);
+            }
+              if(temp.right!=null){
+                temp.right.hd=hd+1;//as per the algorithm if left node is present then add the left node to the queue and make it's line to hd-1
+                q.add(temp.right);
+            }
+        }
+        //at the end copy the all map value to the ans and return the answer
+        for(Map.Entry<Integer,Integer> entry :map.entrySet()){
+            ans.add(entry.getValue());
+        }
+        return ans;
+    }
+}
