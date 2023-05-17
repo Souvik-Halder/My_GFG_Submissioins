@@ -1,0 +1,44 @@
+class Pair{
+    int hd;
+    Node node;
+    Pair(Node node,int hd){
+        this.node=node;
+        this.hd=hd;
+    }
+}
+
+class Solution
+{
+    //Function to return a list of nodes visible from the top view 
+    //from left to right in Binary Tree.
+    static ArrayList<Integer> topView(Node root)
+    {
+     
+        ArrayList<Integer> ans=new ArrayList<>();
+        Map<Integer,Integer> map=new TreeMap<>();
+        
+        Queue<Pair> q=new LinkedList<Pair>();
+        q.add(new Pair(root,0));//At first add the root to the queue
+        while(!q.isEmpty()){
+            Pair temp=q.remove();
+            int hd=temp.hd;//taking the vertical line line from the node
+            if(map.get(hd)==null){
+            map.put(hd,temp.node.data);//putting the line->node to the map
+            }
+            if(temp.node.left!=null){
+                temp.hd=hd-1;//as per the algorithm if left node is present then add the left node to the queue and make it's line to hd-1
+                q.add(new Pair(temp.node.left,hd-1));
+            }
+              if(temp.node.right!=null){
+                temp.hd=hd+1;//as per the algorithm if left node is present then add the left node to the queue and make it's line to hd-1
+                q.add(new Pair(temp.node.right,hd+1));
+            }
+        }
+        //at the end copy the all map value to the ans and return the answer
+        for(Map.Entry<Integer,Integer> entry :map.entrySet()){
+            ans.add(entry.getValue());
+        }
+        return ans;
+    
+    }
+}
