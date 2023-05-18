@@ -1,0 +1,33 @@
+class Solution {
+    boolean isHeap(Node root) {
+        if(root==null){
+            return true;
+        }
+        Queue<Node> q=new LinkedList<>();
+        q.add(root);
+        boolean seen=false;
+        while(!q.isEmpty()){
+            Node temp=q.poll();
+            if(temp.left!=null){
+                if(temp.left.data>temp.data || seen){//if the seen variable true and left child data is greater than it's parent node than return false
+                   
+                    return false;
+                }
+                q.add(temp.left);
+            }
+            else{seen=true;}//we are returning the empty left child so we are making the seen variable to true
+             if(temp.right!=null){
+                if(temp.right.data>temp.data || seen){//if the seen variable true and right child data is greater than it's parent node than return false
+                    return false;
+                }
+                q.add(temp.right);
+            }
+            else{seen=true;}//we are returning the empty right child so we are making the seen variable to true
+        
+            
+            
+            
+        }
+        return true;
+    }
+}
